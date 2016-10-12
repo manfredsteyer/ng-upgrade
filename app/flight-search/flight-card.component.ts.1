@@ -1,0 +1,22 @@
+
+import {Flight} from "../entities/flight";
+import * as angular from 'angular';
+
+class FlightCardController {
+    item: Flight;
+    selectedItem: Flight;
+
+    select() {
+        this.selectedItem = this.item;
+    }
+}
+
+export var flightCardCompDesc: angular.IComponentOptions = {
+    controller: FlightCardController,
+    templateUrl: 'app/flight-search/flight-card.component.html',
+    transclude: true,
+    bindings: {
+        item: '<',
+        selectedItem: '='
+    }
+};

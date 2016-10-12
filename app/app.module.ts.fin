@@ -1,0 +1,46 @@
+import * as angular from 'angular';
+import {FlightService} from "./services/flight.service";
+import {createCityFilter} from "./fliters/city.filter";
+import {FlightCardComponent} from "./flight-search/flight-card.component";
+import {createCityValidatorDDO} from "./validation/city-validator";
+import {createCityAsyncValidatorDDO} from "./validation/city-async-validator";
+//import {flightSearchComponentDesc} from "./flight-search/flight-search.component";
+import {HomeComponent} from "./home/home.component";
+import {PassengerSearchComponent} from "./passenger-search/passenger-search.component";
+import {appComponentDesc} from "./app.component";
+import {FlightEditComponent} from "./flight-edit/flight-edit.component";
+import {FlightBookingComponent} from "./flight-booking/flight-booking.component";
+import { OAuthService} from 'angular2-oauth2/oauth-service';
+import tabs from './tabs/tabs';
+import {BookingEventService} from "./services/booking-event.service";
+import {ShoppingCardComponent} from "./shopping-card/shopping-card.component";
+
+// Remove
+// import { FlightSearchController } from './flight-search/flight-search';
+
+// Add
+import { flightSearchComponent } from './flight-search/flight-search.component';
+
+var app = angular.module('flight-app', ['ngMessages', 'ui.router', tabs]);
+
+// Remove
+// app.controller('FlightSearchController', FlightSearchController);
+
+// Add
+app.component('flightSearch', flightSearchComponent);
+
+app.service("flightService", FlightService);
+app.service('bookingEventService', BookingEventService );
+app.constant("baseURL", "http://www.angular.at")
+app.filter("city", createCityFilter);
+app.component('flightCard', FlightCardComponent);
+app.directive('city', createCityValidatorDDO);
+app.directive('cityAsync', createCityAsyncValidatorDDO);
+app.component('home', HomeComponent);
+app.component('passengerSearch', PassengerSearchComponent);
+app.component('app', appComponentDesc);
+app.component('flightEdit', FlightEditComponent);
+app.component('flightBooking', FlightBookingComponent);
+app.service('oauthService', OAuthService);
+app.component('shoppingCard', ShoppingCardComponent);
+

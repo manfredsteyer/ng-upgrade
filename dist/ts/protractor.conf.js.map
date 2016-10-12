@@ -1,0 +1,1 @@
+{"version":3,"file":"protractor.conf.js","sourceRoot":"","sources":["../../protractor.conf.js"],"names":[],"mappings":"AAAA,OAAO,CAAC,MAAM,GAAG;IACf,aAAa,EAAE,IAAI;IAEnB,YAAY,EAAE;QACZ,aAAa,EAAE,QAAQ;KACxB;IAED,KAAK,EAAE,CAAC,wBAAwB,CAAC;IAEjC,wCAAwC;IACxC,eAAe,EAAE;QACf,UAAU,EAAE,IAAI;QAChB,sBAAsB,EAAE,KAAK;KAC9B;CACF,CAAC"}

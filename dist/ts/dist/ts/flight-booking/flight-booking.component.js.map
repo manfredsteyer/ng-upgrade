@@ -1,0 +1,1 @@
+{"version":3,"file":"flight-booking.component.js","sourceRoot":"","sources":["../../../flight-booking/flight-booking.component.js"],"names":[],"mappings":"AAAA,YAAY,CAAC;AACb,IAAI,uBAAuB,GAAG,CAAC;IAC3B;IACA,CAAC;IACD,MAAM,CAAC,uBAAuB,CAAC;AACnC,CAAC,EAAE,CAAC,CAAC;AACL,OAAO,CAAC,0BAA0B,GAAG;IACjC,UAAU,EAAE,uBAAuB;IACnC,QAAQ,EAAE,OAAO,CAAC,iCAAiC,CAAC;CACvD,CAAC;AACF,oDAAoD"}
