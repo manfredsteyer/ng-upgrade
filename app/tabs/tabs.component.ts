@@ -1,15 +1,5 @@
 import * as angular from 'angular';
 
-/*
-    <tabs>
-        <tab title="$ctrl.x">
-        Bla Bla
-        </tab>
-         <tab title="bla bla">
-         </tab>
-    </tabs>
-*/
-
 class TabsController {
 
     private tabs: Array<TabController> = [];
@@ -25,8 +15,6 @@ class TabsController {
     }
 
     $postLink() {
-        // 1. Kinder sind gerendert!
-        // 2. DOM-Manipulationen
         if (this.tabs.length == 0) return;
         this.activate(this.tabs[0]);
     }
@@ -38,9 +26,9 @@ export var tabsComponentDesc: angular.IComponentOptions = {
     transclude: true,
     template: `
 
-        <div style="background-color:lightpink; padding:20px;">
+        <div style="background-color:lightblue; padding:20px;">
             <span ng-repeat="tab in $ctrl.tabs" style="padding-right:20px;">
-                <a ng-click="$ctrl.activate(tab)">{{tab.title}}</a>
+                <a style="cursor:pointer" ng-click="$ctrl.activate(tab)">{{tab.title}}</a>
             </span>
 
             <ng-transclude></ng-transclude>

@@ -5,14 +5,14 @@ var FlightCardController = (function () {
     FlightCardController.prototype.select = function () {
         this.selectedItem = this.item;
         if (this.selectedItemChange) {
-            this.selectedItemChange({ $event: this.selectedItem });
+            this.selectedItemChange(this.selectedItem);
         }
     };
     return FlightCardController;
 }());
 exports.FlightCardComponent = {
     controller: FlightCardController,
-    templateUrl: 'app/flight-search/flight-card.component.html',
+    templateUrl: './flight-card.component.html',
     transclude: true,
     bindings: {
         item: '<',

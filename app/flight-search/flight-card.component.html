@@ -2,7 +2,7 @@
      ng-style="{'background-color': ($ctrl.selectedItem == $ctrl.item) ?  'orange' : 'lightsteelblue' }" >
 
     <h2>{{$ctrl.item.from}} - {{$ctrl.item.to}}</h2>
-    <p>Flugnr. #{{$ctrl.item.id}}</p>
+    <p>Id #{{$ctrl.item.id}}</p>
     <p>Date: {{$ctrl.item.date | date:'short'}}</p>
 
     <p>
@@ -12,7 +12,7 @@
                 class="btn btn-default"
                 ng-click="$ctrl.select()" />
 
-        <ng-transclude></ng-transclude>
+        <a class="btn btn-default" href="#/flightBooking/flight/{{$ctrl.item.id}}">Edit</a>
 
     </p>
 </div>

@@ -1,8 +1,22 @@
 "use strict";
 var PassengerSearchController = (function () {
-    function PassengerSearchController() {
-        this.info = "PassengerSearch";
+    function PassengerSearchController(passengerService) {
+        this.passengerService = passengerService;
+        this.name = "Doe";
+        this.passenger = [];
     }
+    PassengerSearchController.prototype.search = function () {
+        var _this = this;
+        this
+            .passengerService
+            .find(this.name)
+            .then(function (passenger) {
+            _this.passenger = passenger;
+        })
+            .catch(function (err) {
+            console.error(err);
+        });
+    };
     return PassengerSearchController;
 }());
 exports.PassengerSearchComponent = {

@@ -10,7 +10,7 @@ class FlightCardController {
     select() {
         this.selectedItem = this.item;
         if (this.selectedItemChange) {
-            this.selectedItemChange({$event: this.selectedItem});
+            this.selectedItemChange(this.selectedItem);
         }
     }
 }

@@ -7,7 +7,7 @@ class FlightSearchController {
     public from: string = 'Hamburg';
     public to: string = 'Graz';
     public selectedFlight: Flight = null;
-    private flightService: FlightSearchController;
+    private flightService: FlightService;
     private bookingEventService: BookingEventService;
 
     constructor(flightService: FlightService, bookingEventService: BookingEventService) {
@@ -30,6 +30,7 @@ class FlightSearchController {
     }
 
     select(f) {
+        console.debug('select', f);
         this.selectedFlight = f;
         this.bookingEventService.publish(f);
     }
@@ -37,5 +38,5 @@ class FlightSearchController {
 
 export const FlightSearchComponent: angular.IComponentOptions = {
     controller: FlightSearchController,
-    templateUrl: 'app/flight-search/flight-search.component.html'
+    templateUrl: './flight-search.component.html'
 }

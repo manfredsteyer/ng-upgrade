@@ -19,6 +19,7 @@ var FlightSearchController = (function () {
         });
     };
     FlightSearchController.prototype.select = function (f) {
+        console.debug('select', f);
         this.selectedFlight = f;
         this.bookingEventService.publish(f);
     };
@@ -26,6 +27,6 @@ var FlightSearchController = (function () {
 }());
 exports.FlightSearchComponent = {
     controller: FlightSearchController,
-    templateUrl: 'app/flight-search/flight-search.component.html'
+    templateUrl: './flight-search.component.html'
 };
 //# sourceMappingURL=flight-search.component.js.map

@@ -4,7 +4,8 @@
     "target": "es5",
     "outDir": "dist/ts",
     "sourceMap": true,
-    "allowJs": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "moduleResolution": "node"
   },
   "exclude": [

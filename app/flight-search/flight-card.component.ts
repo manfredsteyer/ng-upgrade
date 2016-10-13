@@ -9,14 +9,14 @@ class FlightCardController {
     select() {
         this.selectedItem = this.item;
         if (this.selectedItemChange) {
-            this.selectedItemChange({$event: this.selectedItem});
+            this.selectedItemChange(this.selectedItem);
         }
     }
 }
 
 export const FlightCardComponent: angular.IComponentOptions = {
     controller: FlightCardController,
-    templateUrl: 'app/flight-search/flight-card.component.html',
+    templateUrl: './flight-card.component.html',
     transclude: true,
     bindings: {
         item: '<',

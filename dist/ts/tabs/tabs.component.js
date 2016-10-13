@@ -1,13 +1,4 @@
 "use strict";
-/*
-    <tabs>
-        <tab title="$ctrl.x">
-        Bla Bla
-        </tab>
-         <tab title="bla bla">
-         </tab>
-    </tabs>
-*/
 var TabsController = (function () {
     function TabsController() {
         this.tabs = [];
@@ -22,8 +13,6 @@ var TabsController = (function () {
         }
     };
     TabsController.prototype.$postLink = function () {
-        // 1. Kinder sind gerendert!
-        // 2. DOM-Manipulationen
         if (this.tabs.length == 0)
             return;
         this.activate(this.tabs[0]);
@@ -33,7 +22,7 @@ var TabsController = (function () {
 exports.tabsComponentDesc = {
     controller: TabsController,
     transclude: true,
-    template: "\n\n        <div style=\"background-color:lightpink; padding:20px;\">\n            <span ng-repeat=\"tab in $ctrl.tabs\" style=\"padding-right:20px;\">\n                <a ng-click=\"$ctrl.activate(tab)\">{{tab.title}}</a>\n            </span>\n\n            <ng-transclude></ng-transclude>\n        </div>\n    "
+    template: "\n\n        <div style=\"background-color:lightblue; padding:20px;\">\n            <span ng-repeat=\"tab in $ctrl.tabs\" style=\"padding-right:20px;\">\n                <a style=\"cursor:pointer\" ng-click=\"$ctrl.activate(tab)\">{{tab.title}}</a>\n            </span>\n\n            <ng-transclude></ng-transclude>\n        </div>\n    "
 };
 var TabController = (function () {
     function TabController() {

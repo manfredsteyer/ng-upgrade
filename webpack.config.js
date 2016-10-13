@@ -7,7 +7,7 @@ module.exports = {
     devtool: 'source-map',
     entry: {
         'test': './app/test.ts',
-        'vendor': './app/vendor.ts',
+        'vendor': ['./app/polyfills.ts', './app/vendor.ts'],
         'app': './app/app.ts'
     },
     output: {
@@ -23,7 +23,7 @@ module.exports = {
             { test: /\.(jpg|jpeg|gif|png)$/, loader:'file-loader?name=img/[path][name].[ext]' },
             { test: /\.css$/, loader:'raw-loader' },
             { test: /\.html$/,  loaders: ['html-loader'] },
-            { test: /\.ts$/, loaders: ['awesome-typescript-loader'], exclude: /node_modules/}
+            { test: /\.ts$/, loaders: ['angular2-template-loader', 'awesome-typescript-loader'], exclude: /node_modules/}
         ]
     },
     modulesDirectories: ['node_modules'],

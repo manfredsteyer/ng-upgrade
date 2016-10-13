@@ -41,9 +41,9 @@ import { FormsModule } from '@angular/forms';
 
 // Add import for MigratedFlightSearchComponent
 import {MigratedFlightSearchComponent} from "./flight-search/migrated-flight-search.component";
-import {PassengerCardComponent} from "./passenger-search/passenger-card.component";
-import {PassengerService} from "./services/passenger.service";
 
+// Create UpgradeAdapter
+export const upgradeAdapter = new UpgradeAdapter(forwardRef(() => MigratedAppModule));
 
 
 var app = angular.module('flight-app', ['ngMessages', 'ui.router', tabs]);
@@ -69,20 +69,18 @@ app.component('flightCard', FlightCardComponent);
 app.directive('city', createCityValidatorDDO);
 app.directive('cityAsync', createCityAsyncValidatorDDO);
 app.component('home', HomeComponent);
+app.component('passengerSearch', PassengerSearchComponent);
 app.component('app', AppComponent);
 app.component('flightEdit', FlightEditComponent);
 app.component('flightBooking', FlightBookingComponent);
 app.service('oauthService', OAuthService);
 app.component('shoppingCard', ShoppingCardComponent);
 
-app.component('passengerCard', PassengerCardComponent);
-app.component('passengerSearch', PassengerSearchComponent);
-app.service('passengerService', PassengerService);
+// Add Upgrade for flightService
+upgradeAdapter.upgradeNg1Provider('flightService');
 
-// Create UpgradeAdapter
-export const upgradeAdapter = new UpgradeAdapter(forwardRef(() => AppModule));
-
-
+// Downgrade DemoCmp
+app.directive('migratedFlightSearch', <any>upgradeAdapter.downgradeNg2Component(MigratedFlightSearchComponent))
 
 
 // Add MigratedAppModule
@@ -97,11 +95,6 @@ export const upgradeAdapter = new UpgradeAdapter(forwardRef(() => AppModule));
         upgradeAdapter.upgradeNg1Component('flightCard')
     ]
 })
-class AppModule {
+class MigratedAppModule {
 }
 
-// Add Upgrade for flightService
-upgradeAdapter.upgradeNg1Provider('flightService');
-
-// Downgrade DemoCmp
-app.directive('migratedFlightSearch', <any>upgradeAdapter.downgradeNg2Component(MigratedFlightSearchComponent))

@@ -1,19 +1,34 @@
-<h1>{{$ctrl.info}}</h1>
+<h1>Passenger Search</h1>
 
-<tabs>
-    <tab title="Overview">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aspernatur consequatur dicta dolores incidunt inventore molestias, necessitatibus officiis, sit, velit voluptate voluptatem. Consequatur facere harum hic quod, ratione suscipit voluptate?
-    </tab>
-    <tab title="Details">
-        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis corporis cupiditate error et illum
-            nesciunt non nulla qui! Ad asperiores autem fugiat ipsum maiores mollitia sequi veniam vitae? Id, molestias.
-        </div>
-        <div>Architecto commodi debitis, enim esse natus nemo perferendis voluptatibus. Ducimus facilis id, in ipsum
-            iure libero maiores minus quas reiciendis, similique sit totam velit, voluptatum. Beatae eos in quasi
-            voluptate?
-        </div>
-        <div>Dolorum pariatur quo soluta unde? Ad aspernatur eius fugit maxime modi, ut! Consectetur, corporis delectus
-            dolore eos fugiat id ipsa ipsum odio pariatur porro quae quidem sint veritatis. Maiores, voluptate.
-        </div>
-    </tab>
-</tabs>
+<form name="form" novalidate>
+
+    <div class="form-group">
+        <label>Name:</label>
+        <input name="from"
+               class="form-control"
+               ng-model="$ctrl.name">
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-default"
+                ng-click="$ctrl.search()">Search!</button>
+    </div>
+
+</form>
+
+<div class="row">
+    <div ng-repeat="p in $ctrl.passenger" class="col-sm-4" style="padding:20px;">
+        <passenger-card
+                item="p"
+                selected-item="$ctrl.selectedPassenger"
+                selected-item-change="$ctrl.selectedPassenger = $locals">
+        </passenger-card>
+
+    </div>
+</div>
+<p>&nbsp;</p>
+<div class="row">
+    <pre>Selected Passenger
+----------------------
+{{$ctrl.selectedPassenger | json }}</pre>
+</div>
