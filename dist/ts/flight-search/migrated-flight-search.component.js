@@ -13,8 +13,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var core_1 = require('@angular/core');
 var flight_service_1 = require('../services/flight.service');
+// Add import for BookingEventService
+var booking_event_service_1 = require("../services/booking-event.service");
 var MigratedFlightSearchComponent = (function () {
-    function MigratedFlightSearchComponent(flightService) {
+    function MigratedFlightSearchComponent(
+        // Add argument for bookingEventService
+        bookingEventService, flightService) {
+        this.bookingEventService = bookingEventService;
         this.flightService = flightService;
         this.from = "Hamburg";
         this.to = "Graz";
@@ -31,14 +36,17 @@ var MigratedFlightSearchComponent = (function () {
     };
     MigratedFlightSearchComponent.prototype.select = function (flight) {
         this.selectedFlight = flight;
+        // Call bookingEventService
+        this.bookingEventService.publish(flight);
     };
     MigratedFlightSearchComponent = __decorate([
         core_1.Component({
             selector: 'migrated-flight-search',
             templateUrl: './migrated-flight-search.component.html'
         }),
-        __param(0, core_1.Inject('flightService')), 
-        __metadata('design:paramtypes', [flight_service_1.FlightService])
+        __param(0, core_1.Inject('bookingEventService')),
+        __param(1, core_1.Inject('flightService')), 
+        __metadata('design:paramtypes', [booking_event_service_1.BookingEventService, flight_service_1.FlightService])
     ], MigratedFlightSearchComponent);
     return MigratedFlightSearchComponent;
 }());

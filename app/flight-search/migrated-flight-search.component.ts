@@ -2,6 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { FlightService } from '../services/flight.service';
 import { Flight } from "../shared/flight";
 
+// Add import for BookingEventService
+import {BookingEventService} from "../services/booking-event.service";
+
 @Component({
     selector: 'migrated-flight-search',
     templateUrl: './migrated-flight-search.component.html'
@@ -13,7 +16,10 @@ export class MigratedFlightSearchComponent {
 
     public selectedFlight: Flight;
 
-    constructor(@Inject('flightService') private flightService: FlightService) {
+    constructor(
+        // Add argument for bookingEventService
+        @Inject('bookingEventService') private bookingEventService: BookingEventService,
+        @Inject('flightService') private flightService: FlightService) {
     }
 
     public get flights() {
@@ -26,5 +32,8 @@ export class MigratedFlightSearchComponent {
 
     public select(flight: Flight) {
         this.selectedFlight = flight;
+
+        // Call bookingEventService
+        this.bookingEventService.publish(flight);
     }
 }

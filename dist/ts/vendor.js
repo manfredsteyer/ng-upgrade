@@ -16,4 +16,5 @@ require('@angular/upgrade');
 // RxJS 5
 // import 'rxjs/Rx';
 require('rxjs/add/operator/map');
+require('rxjs/add/operator/toPromise');
 //# sourceMappingURL=vendor.js.map

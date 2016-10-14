@@ -25,10 +25,18 @@ angular
             .state('flightBooking.passengerSearch', {
                 url: '/passenger',
                 template: '<passenger-search></passenger-search>'
-            }).state('flightBooking.flightEdit', {
-            url: '/flight/:id',
-            template: '<flight-edit></flight-edit>'
-        });
+            })
+            .state('flightBooking.flightEdit', {
+                url: '/flight/:id',
+                template: '<flight-edit [id]="$ctrl.id"></flight-edit>',
+                resolve: {
+                    id: $stateParams => $stateParams.id
+                    // same as:
+                    // id: function($stateParams) { return $stateParams.id; }
+                },
+                controllerAs: '$ctrl',
+                controller: function(id) { this.id = id; }
+            });
 
 });
 

@@ -18,3 +18,4 @@ import '@angular/upgrade';
 // RxJS 5
 // import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';

@@ -15,10 +15,13 @@ import {createCityAsyncValidatorDDO} from "./validation/city-async-validator";
 import {HomeComponent} from "./home/home.component";
 import {PassengerSearchComponent} from "./passenger-search/passenger-search.component";
 import {AppComponent} from "./app.component";
-import {FlightEditComponent} from "./flight-edit/flight-edit.component";
+
+// Remove FlightEdit
+//import {FlightEditComponent} from "./flight-edit/flight-edit.component";
+
 import {FlightBookingComponent} from "./flight-booking/flight-booking.component";
 import { OAuthService} from 'angular2-oauth2/oauth-service';
-import tabs from './tabs/tabs';
+import tabs from './tabs/tabs.module';
 import {BookingEventService} from "./services/booking-event.service";
 import {ShoppingCardComponent} from "./shopping-card/shopping-card.component";
 
@@ -42,9 +45,17 @@ import { FormsModule } from '@angular/forms';
 // Add import for MigratedFlightSearchComponent
 import {MigratedFlightSearchComponent} from "./flight-search/migrated-flight-search.component";
 import {PassengerCardComponent} from "./passenger-search/passenger-card.component";
-import {PassengerService} from "./services/passenger.service";
 
+// Remove import for PassengerService
+// import {PassengerService} from "./services/passenger.service";
 
+// Add import for MigratedPassengerService
+import {MigratedPassengerService} from "./services/migrated-passenger.service";
+import {MigratedTabsModule} from "./tabs/migrated-tabs.module";
+import {MigratedTabComponent, MigratedTabsComponent} from "./tabs/migrated-tabs.component";
+
+// Add import for MigratedFlightEditComponent
+import {MigratedFlightEditComponent} from "./flight-edit/migrated-flight-edit.component";
 
 var app = angular.module('flight-app', ['ngMessages', 'ui.router', tabs]);
 
@@ -70,38 +81,58 @@ app.directive('city', createCityValidatorDDO);
 app.directive('cityAsync', createCityAsyncValidatorDDO);
 app.component('home', HomeComponent);
 app.component('app', AppComponent);
-app.component('flightEdit', FlightEditComponent);
+
+// Remove registration for flightEdit
+// app.component('flightEdit', FlightEditComponent);
+
 app.component('flightBooking', FlightBookingComponent);
 app.service('oauthService', OAuthService);
 app.component('shoppingCard', ShoppingCardComponent);
 
 app.component('passengerCard', PassengerCardComponent);
 app.component('passengerSearch', PassengerSearchComponent);
-app.service('passengerService', PassengerService);
+
+// Remove registration for passengerService
+//app.service('passengerService', PassengerService);
 
 // Create UpgradeAdapter
 export const upgradeAdapter = new UpgradeAdapter(forwardRef(() => AppModule));
-
-
-
 
 // Add MigratedAppModule
 @NgModule({
     imports: [
         BrowserModule,
         HttpModule,
-        FormsModule
+        FormsModule,
+        // Add import for MigratedTabsModule
+        MigratedTabsModule
     ],
     declarations: [
         MigratedFlightSearchComponent,
-        upgradeAdapter.upgradeNg1Component('flightCard')
+        upgradeAdapter.upgradeNg1Component('flightCard'),
+        MigratedFlightEditComponent
+    ],
+    providers: [
+        MigratedPassengerService
     ]
 })
 class AppModule {
 }
 
+
+
 // Add Upgrade for flightService
 upgradeAdapter.upgradeNg1Provider('flightService');
 
-// Downgrade DemoCmp
+// Add Upgrade for booking-event.service
+upgradeAdapter.upgradeNg1Provider('bookingEventService');
+
+// Downgrade migratedFlightSearch
 app.directive('migratedFlightSearch', <any>upgradeAdapter.downgradeNg2Component(MigratedFlightSearchComponent))
+
+// Downgrade MigratedPassengerService and register it as passengerService
+app.factory('passengerService', upgradeAdapter.downgradeNg2Provider(MigratedPassengerService));
+
+// Downgrade MigratedFlightEditComponent and register it
+app.directive('flightEdit', <any>upgradeAdapter.downgradeNg2Component(MigratedFlightEditComponent));
+

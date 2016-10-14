@@ -11,17 +11,15 @@ export class BookingEventService {
     }
 
     subscribe(f: Function) {
+        console.debug('BookingEventService.subscribe');
         this.subscriber.push(f);
     }
 
     publish(f: Flight) {
+        console.debug('BookingEventService.publish', f);
         for(let s of this.subscriber) {
             s(f);
         }
-
-        // setTimeout(() => { this.$rootScope.$apply(); }, 0);
-
-
     }
 
 }

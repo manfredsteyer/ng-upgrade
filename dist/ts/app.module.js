@@ -20,10 +20,11 @@ var city_async_validator_1 = require("./validation/city-async-validator");
 var home_component_1 = require("./home/home.component");
 var passenger_search_component_1 = require("./passenger-search/passenger-search.component");
 var app_component_1 = require("./app.component");
-var flight_edit_component_1 = require("./flight-edit/flight-edit.component");
+// Remove FlightEdit
+//import {FlightEditComponent} from "./flight-edit/flight-edit.component";
 var flight_booking_component_1 = require("./flight-booking/flight-booking.component");
 var oauth_service_1 = require('angular2-oauth2/oauth-service');
-var tabs_1 = require('./tabs/tabs');
+var tabs_module_1 = require('./tabs/tabs.module');
 var booking_event_service_1 = require("./services/booking-event.service");
 var shopping_card_component_1 = require("./shopping-card/shopping-card.component");
 // Remove import for FlightSearchController
@@ -41,8 +42,14 @@ var forms_1 = require('@angular/forms');
 // Add import for MigratedFlightSearchComponent
 var migrated_flight_search_component_1 = require("./flight-search/migrated-flight-search.component");
 var passenger_card_component_1 = require("./passenger-search/passenger-card.component");
-var passenger_service_1 = require("./services/passenger.service");
-var app = angular.module('flight-app', ['ngMessages', 'ui.router', tabs_1.default]);
+// Remove import for PassengerService
+// import {PassengerService} from "./services/passenger.service";
+// Add import for MigratedPassengerService
+var migrated_passenger_service_1 = require("./services/migrated-passenger.service");
+var migrated_tabs_module_1 = require("./tabs/migrated-tabs.module");
+// Add import for MigratedFlightEditComponent
+var migrated_flight_edit_component_1 = require("./flight-edit/migrated-flight-edit.component");
+var app = angular.module('flight-app', ['ngMessages', 'ui.router', tabs_module_1.default]);
 // Remove registration for FlightSearchController
 // app.controller('FlightSearchController', FlightSearchController);
 // Add registration for FlightSearchComponent
@@ -60,13 +67,15 @@ app.directive('city', city_validator_1.createCityValidatorDDO);
 app.directive('cityAsync', city_async_validator_1.createCityAsyncValidatorDDO);
 app.component('home', home_component_1.HomeComponent);
 app.component('app', app_component_1.AppComponent);
-app.component('flightEdit', flight_edit_component_1.FlightEditComponent);
+// Remove registration for flightEdit
+// app.component('flightEdit', FlightEditComponent);
 app.component('flightBooking', flight_booking_component_1.FlightBookingComponent);
 app.service('oauthService', oauth_service_1.OAuthService);
 app.component('shoppingCard', shopping_card_component_1.ShoppingCardComponent);
 app.component('passengerCard', passenger_card_component_1.PassengerCardComponent);
 app.component('passengerSearch', passenger_search_component_1.PassengerSearchComponent);
-app.service('passengerService', passenger_service_1.PassengerService);
+// Remove registration for passengerService
+//app.service('passengerService', PassengerService);
 // Create UpgradeAdapter
 exports.upgradeAdapter = new upgrade_1.UpgradeAdapter(core_1.forwardRef(function () { return AppModule; }));
 // Add MigratedAppModule
@@ -78,11 +87,17 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
-                forms_1.FormsModule
+                forms_1.FormsModule,
+                // Add import for MigratedTabsModule
+                migrated_tabs_module_1.MigratedTabsModule
             ],
             declarations: [
                 migrated_flight_search_component_1.MigratedFlightSearchComponent,
-                exports.upgradeAdapter.upgradeNg1Component('flightCard')
+                exports.upgradeAdapter.upgradeNg1Component('flightCard'),
+                migrated_flight_edit_component_1.MigratedFlightEditComponent
+            ],
+            providers: [
+                migrated_passenger_service_1.MigratedPassengerService
             ]
         }), 
         __metadata('design:paramtypes', [])
@@ -91,6 +106,12 @@ var AppModule = (function () {
 }());
 // Add Upgrade for flightService
 exports.upgradeAdapter.upgradeNg1Provider('flightService');
-// Downgrade DemoCmp
+// Add Upgrade for booking-event.service
+exports.upgradeAdapter.upgradeNg1Provider('bookingEventService');
+// Downgrade migratedFlightSearch
 app.directive('migratedFlightSearch', exports.upgradeAdapter.downgradeNg2Component(migrated_flight_search_component_1.MigratedFlightSearchComponent));
+// Downgrade MigratedPassengerService and register it as passengerService
+app.factory('passengerService', exports.upgradeAdapter.downgradeNg2Provider(migrated_passenger_service_1.MigratedPassengerService));
+// Downgrade MigratedFlightEditComponent and register it
+app.directive('flightEdit', exports.upgradeAdapter.downgradeNg2Component(migrated_flight_edit_component_1.MigratedFlightEditComponent));
 //# sourceMappingURL=app.module.js.map

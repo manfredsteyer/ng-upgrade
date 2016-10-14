@@ -25,8 +25,16 @@
                 (selectedItemChange)="selectedFlight = $event"></flight-card>
         -->
 
+        <!--
         <flight-card [item]="f"
                      [(selectedItem)]="selectedFlight"></flight-card>
+        -->
+
+        <!-- directly call select -->
+        <flight-card
+                [item]="f"
+                [selectedItem]="selectedFlight"
+                (selectedItemChange)="select($event)"></flight-card>
 
     </div>
 </div>
